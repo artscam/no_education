@@ -31,12 +31,12 @@ public class PlayerController : MonoBehaviour
 		grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 		MyInput();
 		SpeedControl();
-
+		
 		if (grounded)
 			rb.drag = GroundDrag;
 		else
 			rb.drag = 0;
-    }
+	}
 
     private void FixedUpdate()
     {
@@ -50,8 +50,7 @@ public class PlayerController : MonoBehaviour
 
 	private void MovePlayer()
     {
-		moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
+		moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;		
 		rb.AddForce(moveDirection.normalized * moveSpeed * 10, ForceMode.Force);
     }
 
