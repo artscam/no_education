@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class Student : MonoBehaviour
 {
     public float speed = 5f;
     public GameObject Target; //meat grinder
-    private Vector3 target;
     public GameObject playerFollow;
-    private NavMeshAgent agent;
+    public UnityEvent uponDeath;
 
-    [Header("Ground Check")]
-    public float Height;
-    public LayerMask whatIsGround;
-    bool grounded;
-    private float fallVelocity;
-    private Vector3 newPosition;
-    private bool isToast = false;
+    private NavMeshAgent agent;
+    private Vector3 target;
     Rigidbody rb;
+    private GameController _gameController;
+    private void Awake()
+    {
+        _gameController = FindObjectOfType<GameController>();
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,20 +41,6 @@ public class Student : MonoBehaviour
         agent.SetDestination(target);
     }
 
-    // Update is called once per frame
-    /*void Update()
-    {       
-        if (isToast)
-        {
-            Debug.Log("get ground!");
-            Vector3 intoChute;
-            intoChute = target - transform.position;
-
-            rb.isKinematic = false;            
-            rb.AddForce(intoChute.normalized, ForceMode.Force);
-            isToast = false;
-        }
-    }*/
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("collided with " + collision.gameObject.name);
@@ -62,24 +48,33 @@ public class Student : MonoBehaviour
 
     public GameObject GrinderEntry;
     private void OnTriggerEnter(Collider other)
-    {
-        // deactivate nav agent and jump into the grinder
+    {   
         if (other.gameObject == GrinderEntry)
         {
-            isToast = true;
-            Debug.Log("Entered");
-            agent.enabled = false;
-            GetComponent<MeshCollider>().enabled = false;
-
-            Vector3 intoChute;
-            intoChute = (target - transform.position);
-            intoChute.y = 2f;
-
-            rb.isKinematic = false;
-            rb.useGravity = true;
-            Vector3 studentHead = transform.position + new Vector3(0, 0.5f, 0);
-            rb.AddForceAtPosition(intoChute.normalized * 300, studentHead, ForceMode.Force);
-            Destroy(gameObject, 2);
+            uponDeath.Invoke();
+            IntoTheAbyss();            
         }
+    }
+
+    private void IntoTheAbyss()
+    {
+        // deactivate nav agent and jump into the grinder
+        agent.enabled = false;
+        GetComponent<MeshCollider>().enabled = false;
+
+        Vector3 intoChute;
+        intoChute = (target - transform.position);
+        intoChute.y = 2f;
+
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        Vector3 studentHead = transform.position + new Vector3(0, 0.5f, 0);
+        rb.AddForceAtPosition(intoChute.normalized * 300, studentHead, ForceMode.Force);
+        Destroy(gameObject, 2);
+    }
+
+    public void AllocateScore()
+    {
+        _gameController.AddScore(1);
     }
 }

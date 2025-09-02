@@ -73,10 +73,21 @@ MonoBehaviour:
   speed: 5
   Target: {fileID: 0}
   playerFollow: {fileID: 0}
-  Height: 2
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
+  uponDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5018351588955437768}
+        m_TargetAssemblyTypeName: Student, Assembly-CSharp
+        m_MethodName: AllocateScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   GrinderEntry: {fileID: 0}
 --- !u!54 &7198281862528513470
 Rigidbody:
@@ -105,7 +116,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &3266550166642648760
