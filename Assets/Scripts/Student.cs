@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Student : MonoBehaviour
 {
     public float speed = 5f;
-    public GameObject Target;
+    public GameObject Target; //meat grinder
     private Vector3 target;
     public GameObject playerFollow;
     private NavMeshAgent agent;
@@ -17,8 +17,12 @@ public class Student : MonoBehaviour
     bool grounded;
     private float fallVelocity;
     private Vector3 newPosition;
+    private bool isToast = false;
+    Rigidbody rb;
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
         // return agent to navmesh if it strays
         if (NavMesh.SamplePosition(transform.position, out NavMeshHit closestHit, 500, 1))
         {
@@ -38,27 +42,44 @@ public class Student : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if ((transform.position - target).magnitude < 1f)
+    /*void Update()
+    {       
+        if (isToast)
         {
-            Destroy(gameObject);
-        }
+            Debug.Log("get ground!");
+            Vector3 intoChute;
+            intoChute = target - transform.position;
 
-        //fall if not on ground
-        grounded = Physics.Raycast(transform.position, Vector3.down, Height * 0.5f + 0.2f, whatIsGround);
-        if (!grounded)
-        {
-            newPosition = transform.position;
-            fallVelocity += 9.8f * Time.deltaTime;
-            newPosition.y -= fallVelocity;
-            transform.position = newPosition;
+            rb.isKinematic = false;            
+            rb.AddForce(intoChute.normalized, ForceMode.Force);
+            isToast = false;
         }
-        else
-            fallVelocity = 0f;             
-    }
+    }*/
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("collided with " + collision.gameObject.name);
+    }
+
+    public GameObject GrinderEntry;
+    private void OnTriggerEnter(Collider other)
+    {
+        // deactivate nav agent and jump into the grinder
+        if (other.gameObject == GrinderEntry)
+        {
+            isToast = true;
+            Debug.Log("Entered");
+            agent.enabled = false;
+            GetComponent<MeshCollider>().enabled = false;
+
+            Vector3 intoChute;
+            intoChute = (target - transform.position);
+            intoChute.y = 2f;
+
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            Vector3 studentHead = transform.position + new Vector3(0, 0.5f, 0);
+            rb.AddForceAtPosition(intoChute.normalized * 300, studentHead, ForceMode.Force);
+            Destroy(gameObject, 2);
+        }
     }
 }
