@@ -4815,6 +4815,7 @@ GameObject:
   - component: {fileID: 3316052846967962008}
   - component: {fileID: 2161139004853977597}
   - component: {fileID: 6279749230487624279}
+  - component: {fileID: 6498186493173268660}
   m_Layer: 0
   m_Name: CubeBarrier
   m_TagString: Untagged
@@ -4831,7 +4832,7 @@ Transform:
   m_GameObject: {fileID: 3526964970113147943}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: 3.48}
-  m_LocalScale: {x: 5, y: 2, z: 0.05}
+  m_LocalScale: {x: 5, y: 2, z: 0.5}
   m_Children: []
   m_Father: {fileID: 5408086973697722236}
   m_RootOrder: 6
@@ -4853,10 +4854,26 @@ BoxCollider:
   m_GameObject: {fileID: 3526964970113147943}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &6498186493173268660
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3526964970113147943}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4212423095032370936
 GameObject:
   m_ObjectHideFlags: 0

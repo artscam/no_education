@@ -8,14 +8,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource SFXSource;
     [Header("Clips")]
     public AudioClip death;
-    public AudioClip riff;
+    public AudioClip riff_1;
+    public AudioClip riff_2;
     public AudioClip whistle;
     public AudioClip punk;
-
-    void Start()
-    {
-        
-    }
 
     public void PlaySFX(AudioClip clip)
     {

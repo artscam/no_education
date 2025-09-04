@@ -10,6 +10,7 @@ public class StudentSpawner : MonoBehaviour
     public GameObject Target;
     public GameObject EntranceTrigger;
     public GameObject playerFollow;
+    public GameObject EscapeTrigger;
     public float timescale = 1f;
     float timer;
     public void SpawnStudent()
@@ -19,6 +20,8 @@ public class StudentSpawner : MonoBehaviour
         newStudent.playerFollow = playerFollow;
         newStudent.speed = speed;
         newStudent.GrinderEntry = EntranceTrigger;
+        newStudent.EscapeTrigger = EscapeTrigger;
+        newStudent.freedomDrive = Random.Range(0.2f, 1f);
     }
 
     void Update()

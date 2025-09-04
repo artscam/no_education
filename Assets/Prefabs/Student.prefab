@@ -88,7 +88,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  uponEscape:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5018351588955437768}
+        m_TargetAssemblyTypeName: Student, Assembly-CSharp
+        m_MethodName: AllocateCorruptScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  freedomDrive: 0
   GrinderEntry: {fileID: 0}
+  EscapeTrigger: {fileID: 0}
 --- !u!54 &7198281862528513470
 Rigidbody:
   m_ObjectHideFlags: 0

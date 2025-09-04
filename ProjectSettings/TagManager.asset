@@ -7,6 +7,8 @@ TagManager:
   - Audio
   - Destroy
   - UIController
+  - FireCircle
+  - Escape
   layers:
   - Default
   - TransparentFX

@@ -10,15 +10,29 @@ public class Student : MonoBehaviour
     public GameObject Target; //meat grinder
     public GameObject playerFollow;
     public UnityEvent uponDeath;
-
+    public UnityEvent uponEscape;
+    public float freedomDrive;
     private NavMeshAgent agent;
     private Vector3 target;
+    private GameObject FireCircle;
     Rigidbody rb;
     private GameController _gameController;
     private void Awake()
     {
         _gameController = FindObjectOfType<GameController>();
     }
+    private void OnEnable()
+    {
+        EventManager.Guitar2 += EventManager_Guitar2;
+        EventManager.DestroyGuitar2 += EventManager_DestroyGuitar2;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Guitar2 -= EventManager_Guitar2;
+        EventManager.DestroyGuitar2 -= EventManager_DestroyGuitar2;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -47,12 +61,23 @@ public class Student : MonoBehaviour
     }
 
     public GameObject GrinderEntry;
+    public GameObject EscapeTrigger;
     private void OnTriggerEnter(Collider other)
     {   
         if (other.gameObject == GrinderEntry)
         {
             uponDeath.Invoke();
             IntoTheAbyss();            
+        }
+        if (other.gameObject == FireCircle)
+        {
+            
+        }
+        if (other.gameObject == EscapeTrigger)
+        {
+            Debug.Log("triggering student escape");
+            uponEscape.Invoke();
+            StudentEscape();
         }
     }
 
@@ -75,6 +100,42 @@ public class Student : MonoBehaviour
 
     public void AllocateScore()
     {
-        _gameController.AddScore(1);
+        _gameController.AddScore();
+    }
+
+    public void AllocateCorruptScore()
+    {
+        _gameController.AddCorruptScore();
+    }
+    private void EventManager_Guitar2()
+    {
+        FireCircle = GameObject.FindGameObjectWithTag("FireCircle");
+        float fireDistance = Vector3.Magnitude(transform.position - FireCircle.transform.position);
+        if (fireDistance < 4f | freedomDrive > Random.Range(0.1f,1f))
+        {
+            if (agent.isActiveAndEnabled)
+                agent.SetDestination(FireCircle.transform.position);
+        }
+        
+    }
+    private void EventManager_DestroyGuitar2()
+    {
+        if (agent.isActiveAndEnabled)
+            agent.SetDestination(target);
+    }
+
+    private void StudentEscape()
+    {
+        // deactivate nav agent and jump to freedom
+        agent.enabled = false;
+        GetComponent<MeshCollider>().enabled = false;
+
+        Vector3 freedomVector;
+        freedomVector = new Vector3(Random.Range(-1f, 1f), 3, 3);
+
+        rb.isKinematic = false;
+        Vector3 studentHead = transform.position + new Vector3(0, 0.1f, 0);
+        rb.AddForceAtPosition(freedomVector.normalized * 300, studentHead, ForceMode.Force);
+        Destroy(gameObject, 2);
     }
 }
