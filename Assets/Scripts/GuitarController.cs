@@ -16,18 +16,21 @@ public class GuitarController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!GameController.isPaused)
         {
-            Guitar_1.Invoke();
-            SpawnFire();
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                Guitar_1.Invoke();
+                SpawnFire();
+            }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            SpawnFireCircle();
-            EventManager.onGuitar2();
-            Guitar_2.Invoke();
-        }           
+            if (Input.GetMouseButtonDown(1))
+            {
+                SpawnFireCircle();
+                EventManager.onGuitar2();
+                Guitar_2.Invoke();
+            }
+        }
 
     }
     private void SpawnFire()

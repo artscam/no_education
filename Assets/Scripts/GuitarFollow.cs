@@ -11,5 +11,12 @@ public class GuitarFollow : MonoBehaviour
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, playerForward.rotation, speed * Time.deltaTime);
     }
+
+    public void RockOut()
+    {
+        // swing the guitar around when using it! listens to guitar_1 and guitar_2
+        transform.rotation = Quaternion.Slerp(transform.rotation, Random.rotation, speed * Time.deltaTime*10);
+    }
 }
+
 
