@@ -6,23 +6,24 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public UnityEvent OnScoreChange;
-    public UnityEvent onPaused;
-    public UnityEvent onUnpaused;
+    public UnityEvent Win;
+    public UnityEvent Lose;
+    public UnityEvent StudentCorrupted;
     public int Score { get; private set; }
     public int corruptionScore { get; private set; }
     private StudentSpawner studentSpawner;
-    private int totalStudents;
+    public int totalStudents;
     private void Awake()
     {
         studentSpawner = FindObjectOfType<StudentSpawner>();
         totalStudents = studentSpawner.spawnCount;
-        Debug.Log($"spawning {totalStudents} students");
     }
     public void AddCorruptScore()
     {
         corruptionScore++;
         totalStudents--;
         OnScoreChange.Invoke();
+        StudentCorrupted.Invoke();
     }
 
     public void AddScore()
@@ -37,7 +38,10 @@ public class GameController : MonoBehaviour
         // once all the students are gone, end the level    
         if (totalStudents == 0)
         {
-            LoadMenu();
+            if (corruptionScore <= 5)
+                Lose.Invoke();
+            else
+                Win.Invoke();
         }
     }
     public void LoadMenu()
@@ -45,33 +49,9 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(0); 
     }
 
-    private void Update()
+    public void LoadLevel(int levelNo)
     {
-        
-        if (Input.GetKeyDown("escape"))
-        {
-            PauseGame();
-        }
-    }
-    public static bool isPaused = false;
-    public void PauseGame()
-    {
-        //toggles between paused and active (0,1)
-        Time.timeScale = 1 - Time.timeScale;
-        isPaused = !isPaused;
-        if (isPaused)
-        {
-            onPaused.Invoke();
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            onUnpaused.Invoke();
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        Debug.Log(Cursor.lockState);
+        SceneManager.LoadScene(levelNo);
     }
 }
     

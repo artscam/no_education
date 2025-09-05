@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Text.RegularExpressions;
 
 public class UIController : MonoBehaviour
 {
@@ -20,5 +21,13 @@ public class UIController : MonoBehaviour
     public void UpdateCorruptScore(GameController gameController)
     {
         _scoreText.text = $"{bufferText} {gameController.corruptionScore}";
+    }
+    string pat = @"[\D ]+";
+    
+    public void UpdateRemaining(GameController gameController)
+    {
+        Regex r = new Regex(pat, RegexOptions.IgnoreCase);
+        string buffer = r.Match(_scoreText.text).Value;
+        _scoreText.text = $"{buffer} {gameController.totalStudents}";
     }
 }

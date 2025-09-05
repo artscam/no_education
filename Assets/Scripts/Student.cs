@@ -9,6 +9,7 @@ public class Student : MonoBehaviour
     public float speed = 5f;
     public GameObject Target; //meat grinder
     public GameObject playerFollow;
+    public Transform hinterland;
     public UnityEvent uponDeath;
     public UnityEvent uponEscape;
     public float freedomDrive;
@@ -39,9 +40,8 @@ public class Student : MonoBehaviour
         rb.isKinematic = true;
         // return agent to navmesh if it strays
         if (NavMesh.SamplePosition(transform.position, out NavMeshHit closestHit, 500, 1))
-        {
             GetComponent<NavMeshAgent>().Warp(closestHit.position);
-        }
+
         agent = GetComponent<NavMeshAgent>();
         agent.enabled = false;
 
@@ -55,11 +55,6 @@ public class Student : MonoBehaviour
         agent.SetDestination(target);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("collided with " + collision.gameObject.name);
-    }
-
     public GameObject GrinderEntry;
     public GameObject EscapeTrigger;
     private void OnTriggerEnter(Collider other)
@@ -69,13 +64,8 @@ public class Student : MonoBehaviour
             uponDeath.Invoke();
             IntoTheAbyss();            
         }
-        if (other.gameObject == FireCircle)
-        {
-            
-        }
         if (other.gameObject == EscapeTrigger)
         {
-            Debug.Log("triggering student escape");
             uponEscape.Invoke();
             StudentEscape();
         }
@@ -110,13 +100,8 @@ public class Student : MonoBehaviour
     private void EventManager_Guitar2()
     {
         FireCircle = GameObject.FindGameObjectWithTag("FireCircle");
-        float fireDistance = Vector3.Magnitude(transform.position - FireCircle.transform.position);
-        if (fireDistance < 4f | freedomDrive > Random.Range(0.1f,1f))
-        {
-            if (agent.isActiveAndEnabled)
-                agent.SetDestination(FireCircle.transform.position);
-        }
-        
+        if (agent.isActiveAndEnabled)
+            agent.SetDestination(FireCircle.transform.position);
     }
     private void EventManager_DestroyGuitar2()
     {
@@ -126,16 +111,10 @@ public class Student : MonoBehaviour
 
     private void StudentEscape()
     {
-        // deactivate nav agent and jump to freedom
-        agent.enabled = false;
+        // run away to designated point and vanish
+        agent.SetDestination(hinterland.position);
+        agent.speed = 20;
         GetComponent<MeshCollider>().enabled = false;
-
-        Vector3 freedomVector;
-        freedomVector = new Vector3(Random.Range(-1f, 1f), 3, 3);
-
-        rb.isKinematic = false;
-        Vector3 studentHead = transform.position + new Vector3(0, 0.1f, 0);
-        rb.AddForceAtPosition(freedomVector.normalized * 300, studentHead, ForceMode.Force);
         Destroy(gameObject, 2);
     }
 }
