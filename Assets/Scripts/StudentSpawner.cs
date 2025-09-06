@@ -7,6 +7,8 @@ public class StudentSpawner : MonoBehaviour
     public int spawnCount = 10;
     public Student Student;
     public float speed = 3f;
+    public int WaitAt = 0; // break students up into waves
+    public float WaitTime = 0f;
     public GameObject Target;
     public GameObject EntranceTrigger;
     public GameObject playerFollow;
@@ -14,6 +16,13 @@ public class StudentSpawner : MonoBehaviour
     public Transform hinterland;
     public float timescale = 1f;
     float timer;
+    float subTimer = 0f;
+    private int totalStudents;
+
+    private void Start()
+    {
+        totalStudents = spawnCount;
+    }
     public void SpawnStudent()
     {
         Student newStudent =  Instantiate(Student);
@@ -27,14 +36,23 @@ public class StudentSpawner : MonoBehaviour
         newStudent.hinterland = hinterland;
     }
 
+    
     void Update()
     {
-        timer += Time.deltaTime;
-        if ((timer >= timescale) & spawnCount > 0)
+        if (spawnCount == totalStudents - WaitAt & subTimer < WaitTime)
         {
-            SpawnStudent();
-            timer = 0;
-            spawnCount--;
-        }            
+            subTimer += Time.deltaTime;
+        }
+        else
+        {
+            timer += Time.deltaTime;
+            if ((timer >= timescale) & spawnCount > 0)
+            {
+                SpawnStudent();
+                timer = 0;
+                spawnCount--;
+            }
+        }
     }
+
 }

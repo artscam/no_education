@@ -73,6 +73,7 @@ MonoBehaviour:
   speed: 5
   Target: {fileID: 0}
   playerFollow: {fileID: 0}
+  hinterland: {fileID: 0}
   uponDeath:
     m_PersistentCalls:
       m_Calls:

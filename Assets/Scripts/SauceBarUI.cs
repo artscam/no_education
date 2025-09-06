@@ -7,7 +7,10 @@ public class SauceBarUI : MonoBehaviour
 {
     public float Sauce, MaxSauce, Width, Height;
     [SerializeField] private RectTransform sauceBar;
-
+    private void Start()
+    {
+        SetSauce(Sauce);
+    }
     public void SetMaxSauce(float maxSauce)
     {
         MaxSauce = maxSauce;

@@ -20,7 +20,7 @@ public class Student : MonoBehaviour
     private GameController _gameController;
     private void Awake()
     {
-        _gameController = FindObjectOfType<GameController>();
+        _gameController = FindObjectOfType<GameController>();         
     }
     private void OnEnable()
     {
@@ -53,6 +53,11 @@ public class Student : MonoBehaviour
 
         target = Target.transform.position;
         agent.SetDestination(target);
+        // if fireceircle exists already head there
+        if (GameObject.FindGameObjectWithTag("FireCircle"))
+        {
+            EventManager_Guitar2();
+        }
     }
 
     public GameObject GrinderEntry;
@@ -105,6 +110,7 @@ public class Student : MonoBehaviour
     }
     private void EventManager_DestroyGuitar2()
     {
+        Debug.Log("the fire is out!");
         if (agent.isActiveAndEnabled)
             agent.SetDestination(target);
     }
@@ -113,7 +119,7 @@ public class Student : MonoBehaviour
     {
         // run away to designated point and vanish
         agent.SetDestination(hinterland.position);
-        agent.speed = 20;
+        agent.speed = 15;
         GetComponent<MeshCollider>().enabled = false;
         Destroy(gameObject, 2);
     }

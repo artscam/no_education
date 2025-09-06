@@ -22,7 +22,7 @@ public class UIController : MonoBehaviour
     {
         _scoreText.text = $"{bufferText} {gameController.corruptionScore}";
     }
-    string pat = @"[\D ]+";
+    string pat = @"[\D]+ ";
     
     public void UpdateRemaining(GameController gameController)
     {

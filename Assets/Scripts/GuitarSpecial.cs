@@ -19,11 +19,11 @@ public class GuitarSpecial : MonoBehaviour
     private void Start()
     {
         sauceBar.SetMaxSauce(MaxSauce);
-        sauceBar.SetSauce(0);
+        sauceBar.SetSauce(Sauce);
     }
     public void IncreaseSauce()
     {
-        Sauce ++;
+        Sauce++;
         Sauce = Mathf.Clamp(Sauce, 0, MaxSauce);
         sauceBar.SetSauce(Sauce);
     }
@@ -55,14 +55,19 @@ public class GuitarSpecial : MonoBehaviour
 
         newPos = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
         newFire.transform.position = newPos;
-        StartCoroutine(DestroyFire(Sauce));       
+
+        
+        StartCoroutine(despawnFireCircle());
+
         Sauce = 0;
         sauceBar.SetSauce(Sauce);
     }
-    IEnumerator DestroyFire(int sauce)
+
+    IEnumerator despawnFireCircle()
     {
-        yield return new WaitForSeconds(sauce);
-        Destroy(newFire);
+        Debug.Log("about to invoke fire destruction");
+        yield return new WaitForSeconds(Sauce);
         EventManager.onDestroyGuitar2();
+        Destroy(newFire);
     }
 }

@@ -10,10 +10,20 @@ public class GuitarController : MonoBehaviour
     public Transform orientation;
     private Vector3 newPos;
     public UnityEvent Guitar_1;
+    private bool isPaused = false;
 
+    private void Start()
+    {
+        isPaused = true;
+    }
+    public void TogglePause()
+    {
+        // call this function from pause menu events onPaused, onUnpaused
+        isPaused = !isPaused;
+    }
     void Update()
     {
-        if (!PauseMenu.isPaused)
+        if (!isPaused)
         {
             if (Input.GetMouseButtonDown(0))
             {
