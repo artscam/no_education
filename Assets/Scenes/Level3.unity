@@ -938,6 +938,7 @@ Transform:
   m_Children:
   - {fileID: 546234112}
   - {fileID: 1741589657}
+  - {fileID: 1562427003}
   m_Father: {fileID: 636516317}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -3007,10 +3008,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SFXSource: {fileID: 277933408}
-  death: {fileID: 0}
-  riff_1: {fileID: 0}
-  riff_2: {fileID: 0}
-  whistle: {fileID: 0}
+  death: {fileID: 8300000, guid: 7ea301d570a1cd041b3be1fe1990979a, type: 3}
+  riff_1: {fileID: 8300000, guid: f0e40369bbb4e0f4abc7ae2641f49059, type: 3}
+  riff_2: {fileID: 8300000, guid: 6260f6051b7513f478f91dbc22bceac3, type: 3}
+  ding: {fileID: 8300000, guid: 2c6fe506890a01743a22c19f41d1246e, type: 3}
   punk: {fileID: 0}
 --- !u!1 &546234111
 GameObject:
@@ -3039,8 +3040,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546234111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.267, y: -0.99, z: -0.072}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.1}
   m_Children: []
   m_Father: {fileID: 153747636}
   m_RootOrder: 0
@@ -7508,6 +7509,76 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1001 &1562427002
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 153747636}
+    m_Modifications:
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.131
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.115
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4877577760927557768, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+      propertyPath: m_Name
+      value: gears
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+--- !u!4 &1562427003 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1607142749124022724, guid: 42045a619f30cda478b24eaeb95692ff, type: 3}
+  m_PrefabInstance: {fileID: 1562427002}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1566644749
 GameObject:
   m_ObjectHideFlags: 0
@@ -7815,10 +7886,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1250, y: 705}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -8896,7 +8967,7 @@ MonoBehaviour:
         m_MethodName: PlaySFX
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 4e2f7d4883be7f44a898460acd091062, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: f0e40369bbb4e0f4abc7ae2641f49059, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -8957,7 +9028,7 @@ MonoBehaviour:
         m_MethodName: PlaySFX
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: ec4fd3bacc0d15d449a050e88ae90969, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 6260f6051b7513f478f91dbc22bceac3, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -16305,12 +16376,12 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9219470143162602548}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e1f36ea11054ec842938ff60478b0f52, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ebd5f56d35eb74d4ab893ddbf1dfbdc4, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.084
   m_Pitch: 1
   Loop: 0
   Mute: 0

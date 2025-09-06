@@ -11,4 +11,7 @@ public static class EventManager
 
     public static event UnityAction StudentEscape;
     public static void onStudentEscape() => StudentEscape?.Invoke();
+
+    public static UnityAction StudentDeath;
+    public static void onStudentDeath() => StudentDeath?.Invoke();
 }

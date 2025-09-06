@@ -67,12 +67,14 @@ public class Student : MonoBehaviour
         if (other.gameObject == GrinderEntry)
         {
             uponDeath.Invoke();
-            IntoTheAbyss();            
+            IntoTheAbyss();
+            EventManager.onStudentDeath();
         }
         if (other.gameObject == EscapeTrigger)
         {
             uponEscape.Invoke();
             StudentEscape();
+            EventManager.onStudentEscape();
         }
     }
 
