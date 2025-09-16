@@ -46,8 +46,10 @@ public class PauseMenu : MonoBehaviour
     public void LoadLevel(int levelNo)
     {
         ResumeGame();
+       // string level = SceneManager.GetActiveScene().name;
+       // SceneManager.LoadScene(level);
+        
         SceneManager.LoadScene(levelNo);
     }
-
 
 }

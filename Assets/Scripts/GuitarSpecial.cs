@@ -10,7 +10,6 @@ public class GuitarSpecial : MonoBehaviour
     [SerializeField]
     private SauceBarUI sauceBar;
     public int Sauce, MaxSauce;
-
     public GameObject FireCircle;
     private GameObject newFire;
     private Vector3 newPos;
@@ -65,7 +64,6 @@ public class GuitarSpecial : MonoBehaviour
 
     IEnumerator despawnFireCircle()
     {
-        Debug.Log("about to invoke fire destruction");
         yield return new WaitForSeconds(Sauce);
         EventManager.onDestroyGuitar2();
         Destroy(newFire);

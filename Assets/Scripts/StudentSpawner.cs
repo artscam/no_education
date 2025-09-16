@@ -32,7 +32,6 @@ public class StudentSpawner : MonoBehaviour
         newStudent.speed = speed;
         newStudent.GrinderEntry = EntranceTrigger;
         newStudent.EscapeTrigger = EscapeTrigger;
-        newStudent.freedomDrive = Random.Range(0.2f, 1f);
         newStudent.hinterland = hinterland;
     }
 

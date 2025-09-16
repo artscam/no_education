@@ -12,12 +12,13 @@ public class Student : MonoBehaviour
     public Transform hinterland;
     public UnityEvent uponDeath;
     public UnityEvent uponEscape;
-    public float freedomDrive;
     private NavMeshAgent agent;
     private Vector3 target;
     private GameObject FireCircle;
     Rigidbody rb;
     private GameController _gameController;
+    public LineRenderer line;
+    
     private void Awake()
     {
         _gameController = FindObjectOfType<GameController>();         
@@ -59,7 +60,10 @@ public class Student : MonoBehaviour
             EventManager_Guitar2();
         }
     }
-
+    private void Update()
+    {
+        DrawPath(agent.path);
+    }
     public GameObject GrinderEntry;
     public GameObject EscapeTrigger;
     private void OnTriggerEnter(Collider other)
@@ -112,7 +116,6 @@ public class Student : MonoBehaviour
     }
     private void EventManager_DestroyGuitar2()
     {
-        Debug.Log("the fire is out!");
         if (agent.isActiveAndEnabled)
             agent.SetDestination(target);
     }
@@ -124,5 +127,21 @@ public class Student : MonoBehaviour
         agent.speed = 15;
         GetComponent<MeshCollider>().enabled = false;
         Destroy(gameObject, 2);
+    }
+
+    public void DrawPath(NavMeshPath path)
+    {
+        line.SetPosition(0, transform.position); //set the line's origin
+
+        if (path.corners.Length < 2) //if the path has 1 or no corners, there is no need
+            return;
+
+        line.positionCount = path.corners.Length; //set the array of positions to the amount of corners
+
+        for (int i = 1; i < path.corners.Length; i++)
+        {
+            line.SetPosition(i, path.corners[i]); //go through each corner and set that to the line renderer's position*
+
+        }
     }
 }

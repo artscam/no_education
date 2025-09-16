@@ -39,9 +39,9 @@ public class GameController : MonoBehaviour
         if (totalStudents == 0)
         {
             if (corruptionScore <= 5)
-                Lose.Invoke();
+                StartCoroutine(LoseLevel());
             else
-                Win.Invoke();
+                StartCoroutine(WinLevel());
         }
     }
     public void LoadMenu()
@@ -52,6 +52,17 @@ public class GameController : MonoBehaviour
     public void LoadLevel(int levelNo)
     {
         SceneManager.LoadScene(levelNo);
+    }
+
+    IEnumerator WinLevel()
+    {
+        yield return new WaitForSeconds(2);
+        Win.Invoke();
+    }
+    IEnumerator LoseLevel()
+    {
+        yield return new WaitForSeconds(2);
+        Lose.Invoke();
     }
 }
     
